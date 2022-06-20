@@ -5,8 +5,8 @@ import { setMargins } from "../../redux/slices/editorSlice";
 import { style } from "./style/style";
 
 export const MarginInputBox = () => {
-  const { margins } = useSelector((state) => state.editor);
   const dispatch = useDispatch();
+  const { margins } = useSelector((state) => state.editor);
 
   const marginChangeHandler = (e) => {
     let marginObj = {
