@@ -6,13 +6,13 @@ import { defaultData } from "./api/instance";
 import "./App.css";
 import { ButtonBox } from "./components/ButtonBox/ButtonBox";
 import { MarginInputBox } from "./components/MarginInputBox/MarginInputBox";
-import { Select } from "./components/Select/Select";
+import { SelectBlock } from "./components/Select/SelectBlock";
 import { TinyMCE } from "./components/TinyMCE/TinyMCE";
 
 const App = () => {
   const [data, setData] = useState("");
   const [loading, setLoading] = useState(false);
-  const { margins } = useSelector((state) => state.editor);
+  const { margins, format } = useSelector((state) => state.editor);
 
   // get template to local storage
   useEffect(() => {
@@ -30,29 +30,42 @@ const App = () => {
 
   //make an api call to generate pdf
   const sendData = async () => {
-    const dataObj = {
-      margins: margins,
-      dataHtml: data,
-    };
-    setLoading(true);
-    const res = await editorAPI.sendData(dataObj);
-    setLoading(false);
-    saveToLocal();
-    const newUrl = defaultData.host + "/" + res;
+    try {
+      const dataObj = {
+        margins: margins,
+        dataHtml: data,
+        format: format,
+      };
+      setLoading(true);
+      const res = await editorAPI.sendData(dataObj);
+      setLoading(false);
+      saveToLocal();
+      const newUrl = defaultData.host + "/" + res;
 
-    const link = document.createElement("a");
-    link.href = newUrl;
-    link.setAttribute("download", true);
-    link.setAttribute("target", "_blank");
-    document.body.appendChild(link);
-    link.click();
-    link.parentNode.removeChild(link);
+      const link = document.createElement("a");
+      link.href = newUrl;
+      link.setAttribute("download", true);
+      link.setAttribute("target", "_blank");
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+    } catch (error) {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="App" style={{ maxWidth: "1000px", margin: "0px auto" }}>
+    <div
+      className="App"
+      style={{
+        maxWidth: "1120px",
+        margin: "0px auto",
+        padding: "50px 20px",
+        background: "#fff",
+      }}
+    >
       <TinyMCE data={data} setData={setData} />
-      <Select />
+      <SelectBlock />
       <MarginInputBox />
       <ButtonBox generateFunction={sendData} loading={loading} />
     </div>

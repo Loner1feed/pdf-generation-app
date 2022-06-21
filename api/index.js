@@ -18,11 +18,12 @@ app.use(express.static('./public'));
 app.post('/generate-pdf', (req, res) => {
 
     const data = req.body.dataHtml;
-    const margins = req.body.margins
-    console.log(req.body)
+    const margins = req.body.margins;
+    const format = req.body.format;
+    console.log(req.body);
 
     const options = {
-        format: 'A4',
+        format: format,
         orientation: "portrait",
         border: {
             left: `${margins.left}cm`,
