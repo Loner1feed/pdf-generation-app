@@ -4,13 +4,11 @@ import { useSelector } from "react-redux";
 import { cmToPx } from "../../helpers/cmToPx";
 import { Box } from "@mui/material";
 import { style } from "./style/style";
+import { widthSetter } from "../../helpers/widthSetter";
+import { contentStyles } from "../../consts/contentStyles";
 
 export const TinyMCE = ({ data, setData }) => {
   const { margins, format } = useSelector((state) => state.editor);
-
-  const [styles] = useState(
-    "@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap'); body { font-family: 'Roboto', sans-serif; font-size:14px; margin: 10px } p {margin: 0}"
-  );
   const ref = useRef();
   const boxRef = useRef();
 
@@ -18,24 +16,7 @@ export const TinyMCE = ({ data, setData }) => {
   let widthStyle;
   useEffect(() => {
     console.log(boxRef.current);
-    switch (format) {
-      case "A3":
-        widthStyle = 1123;
-        break;
-
-      case "A4":
-        widthStyle = 794;
-        break;
-
-      case "A5":
-        widthStyle = 559;
-        break;
-
-      default:
-        widthStyle = 0;
-        break;
-    }
-
+    widthStyle = widthSetter(format);
     boxRef.current.style.width = `${widthStyle}px`;
   }, [format]);
 
@@ -66,6 +47,7 @@ export const TinyMCE = ({ data, setData }) => {
         }}
         value={data}
         init={{
+          selector: "#myTextarea",
           menubar: true,
           plugins: "table code advtable lists fullscreen hr autoresize image",
           toolbar:
@@ -114,7 +96,7 @@ export const TinyMCE = ({ data, setData }) => {
 
             input.click();
           },
-          content_style: styles,
+          content_style: contentStyles,
         }}
       />
     </Box>

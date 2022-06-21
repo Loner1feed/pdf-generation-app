@@ -33,7 +33,7 @@ app.post('/generate-pdf', (req, res) => {
         }
     };
 
-    const style = '<style> @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"); *{font-family: "Roboto", sans-serif;} p {margin: 0; font-weight:normal;} strong {font-size:15px; font-weight: 600; font-weight:bold;} hr { border: 1px solid #eee;} div.wrapper { } body {margin: 0px padding: 0px !important} td, th {padding: 0.4rem;} </style> '
+    const style = `<link rel="stylesheet" type="text/css" id="mce-u0" crossorigin="anonymous" referrerpolicy="origin" href="https://cdn.tiny.cloud/1/no-api-key/tinymce/6.0.3-5/skins/ui/oxide/content.min.css"> <link rel="stylesheet" type="text/css" id="mce-u1" crossorigin="anonymous" referrerpolicy="origin" href="https://cdn.tiny.cloud/1/no-api-key/tinymce/6.0.3-5/skins/content/default/content.min.css"> <style>@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap'); body { font-size:14px; margin: 10px } p {margin: 0}</style>`
 
     const string = data;
     const ress = `${style} <div class="wrapper">${string}</div>`

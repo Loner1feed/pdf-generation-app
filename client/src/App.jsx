@@ -6,12 +6,15 @@ import { defaultData } from "./api/instance";
 import "./App.css";
 import { ButtonBox } from "./components/ButtonBox/ButtonBox";
 import { MarginInputBox } from "./components/MarginInputBox/MarginInputBox";
+import { PreviewModal } from "./components/PreviewModal/PreviewModal";
 import { SelectBlock } from "./components/Select/SelectBlock";
 import { TinyMCE } from "./components/TinyMCE/TinyMCE";
 
 const App = () => {
   const [data, setData] = useState("");
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const { margins, format } = useSelector((state) => state.editor);
 
   // get template to local storage
@@ -54,6 +57,8 @@ const App = () => {
     }
   };
 
+  const handleOpen = () => setOpen(true);
+
   return (
     <div
       className="App"
@@ -67,7 +72,12 @@ const App = () => {
       <TinyMCE data={data} setData={setData} />
       <SelectBlock />
       <MarginInputBox />
-      <ButtonBox generateFunction={sendData} loading={loading} />
+      <ButtonBox
+        generateFunction={sendData}
+        previewFunction={handleOpen}
+        loading={loading}
+      />
+      <PreviewModal open={open} setOpen={setOpen} data={data} />
     </div>
   );
 };

@@ -19,7 +19,7 @@ export const MarginInputBox = () => {
 
   return (
     <Box>
-      <Box component="h2">Hete you can set margins to your document</Box>
+      <Box component="h2">Here you can set margins to your document</Box>
 
       <Box sx={style.grid}>
         <TextField
