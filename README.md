@@ -2,9 +2,9 @@
 --------------------
 
 ### How to run server:
-  cd api
-  npm run dev
+    cd api
+    npm run dev
 
 ### How to run client:
-  cd client
-  npm start
+    cd client
+    npm start
