@@ -1,10 +1,10 @@
 # pdf-generation-app
 --------------------
 
-###How to run server:
-`cd api`
-`npm run dev`
+### How to run server:
+  cd api
+  npm run dev
 
-###How to run client:
-`cd client`
-`npm start`
+### How to run client:
+  cd client
+  npm start
