@@ -41,6 +41,7 @@ export const TinyMCE = ({ data, setData }) => {
   return (
     <Box sx={style.container} ref={boxRef}>
       <Editor
+        apiKey="i2xs01cxk5m49gx5d7wsasm47jc0ep8mujr1ttlnx67qy5ma"
         ref={ref}
         onEditorChange={(e) => {
           setData(e);
@@ -57,6 +58,7 @@ export const TinyMCE = ({ data, setData }) => {
           image_title: true,
           automatic_uploads: true,
           file_picker_types: "image",
+          innerHeight: 1000,
           /* and here's our custom image picker*/
           file_picker_callback: function (cb, value, meta) {
             var input = document.createElement("input");

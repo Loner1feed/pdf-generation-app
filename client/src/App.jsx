@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { editorAPI } from "./api/editorAPI";
 import { defaultData } from "./api/instance";
